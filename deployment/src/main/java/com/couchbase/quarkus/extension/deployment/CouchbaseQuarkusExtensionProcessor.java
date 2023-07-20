@@ -17,6 +17,7 @@ package com.couchbase.quarkus.extension.deployment;
 
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.RuntimeInitializedClassBuildItem;
 
 class CouchbaseQuarkusExtensionProcessor {
     private static final String FEATURE = "quarkus-couchbase";
@@ -24,5 +25,23 @@ class CouchbaseQuarkusExtensionProcessor {
     @BuildStep
     FeatureBuildItem feature() {
         return new FeatureBuildItem(FEATURE);
+    }
+
+    //    @BuildStep
+    //    RuntimeInitializedClassBuildItem clusterEnvironment() {
+    //        return new RuntimeInitializedClassBuildItem(ClusterEnvironment.class.getCanonicalName());
+    //    }
+
+    @BuildStep
+    RuntimeInitializedClassBuildItem log4JLoggerFactory() {
+        return new RuntimeInitializedClassBuildItem(
+                "com.couchbase.client.core.deps.io.netty.util.internal.logging.Log4JLoggerFactory");
+        //                com.couchbase.client.core.deps.io.netty.util.internal.logging.Log4JLoggerFactory.class.getCanonicalName());
+    }
+
+    @BuildStep
+    RuntimeInitializedClassBuildItem internalLoggerFactory() {
+        return new RuntimeInitializedClassBuildItem(
+                com.couchbase.client.core.deps.io.netty.util.internal.logging.InternalLoggerFactory.class.getCanonicalName());
     }
 }
