@@ -17,14 +17,14 @@
     <dependency>
       <groupId>com.couchbase.client</groupId>
       <artifactId>java-client</artifactId>
-      <version>3.4.7</version>
+      <version>${couchbase.client.version}</version>
     </dependency>
   </dependencies>
   <build>
     <plugins>
       <plugin>
         <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-bootstrap-maven-plugin</artifactId>
+        <artifactId>quarkus-extension-maven-plugin</artifactId>
         <version>${quarkus.version}</version>
         <executions>
           <execution>
